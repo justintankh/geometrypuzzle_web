@@ -13,7 +13,7 @@ import {
 } from "./helpers";
 import { validateInput } from "./utils";
 
-export function useFormHook() {
+export function Form() {
 	const {
 		startWorkflow,
 		restartWorkflow,
@@ -57,30 +57,29 @@ export function useFormHook() {
 		focusTextarea();
 	};
 
-	const Form = () => (
-		<form
-			onSubmit={handleSubmit}
-			onKeyDown={(keyEvent) => {
-				if (keyEvent.key !== "Enter") return;
-				handleSubmit(keyEvent);
-			}}
-			onReset={restartWorkflow}>
-			<textarea
-				id="textarea"
-				name="prompt"
-				rows={1}
-				cols={1}
-				placeholder="Send Message..."></textarea>
-			<button type="submit">
-				<img src={sendSvg} alt="send" />
-			</button>
-			<button type="reset" id="clearButton">
-				<img src={reset_on} alt="send" />
-			</button>
-		</form>
+	return (
+		<>
+			<div id="chat_container"></div>
+			<form
+				onSubmit={handleSubmit}
+				onKeyDown={(keyEvent) => {
+					if (keyEvent.key !== "Enter") return;
+					handleSubmit(keyEvent);
+				}}
+				onReset={restartWorkflow}>
+				<textarea
+					id="textarea"
+					name="prompt"
+					rows={1}
+					cols={1}
+					placeholder="Send Message..."></textarea>
+				<button type="submit">
+					<img src={sendSvg} alt="send" />
+				</button>
+				<button type="reset" id="clearButton">
+					<img src={reset_on} alt="send" />
+				</button>
+			</form>
+		</>
 	);
-
-	return {
-		FormDisplay: Form,
-	};
 }

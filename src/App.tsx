@@ -1,13 +1,11 @@
 import "./App.css";
-import { useFormHook } from "./Components/Form";
+import { Form } from "./Components/Form";
 
 function App() {
-	const { FormDisplay } = useFormHook();
 	return (
 		<>
 			<div id="app">
-				<div id="chat_container"></div>
-				<FormDisplay />
+				<Form />
 			</div>
 		</>
 	);
