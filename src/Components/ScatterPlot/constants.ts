@@ -1,5 +1,3 @@
-import { MessageName } from "../../Hooks/useWorkflow/types";
-
 export const dummydata = {
 	coordinates: [
 		{
