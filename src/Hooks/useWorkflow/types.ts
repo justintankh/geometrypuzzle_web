@@ -1,5 +1,3 @@
-export const WORKFLOW_URI = "http://localhost:8080/workflow/";
-
 export enum RequestMapping {
 	START = "start",
 	RESTART = "restart",

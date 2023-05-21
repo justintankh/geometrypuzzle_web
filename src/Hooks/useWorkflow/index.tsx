@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import {
 	RestartRequest,
 	ContinueRequest,
-	WORKFLOW_URI,
 	StartRequest,
 	PuzzleResponse,
 	RequestMapping,
@@ -10,6 +9,7 @@ import {
 	Point,
 } from "./types";
 import { getUUID } from "./helpers";
+import { WORKFLOW_URI } from "../../Components/Form/constants";
 
 export function useWorkflow() {
 	const storedUUID = getUUID();
