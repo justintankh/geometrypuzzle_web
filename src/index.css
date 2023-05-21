@@ -55,6 +55,21 @@ button:focus-visible {
 	outline: 4px auto -webkit-focus-ring-color;
 }
 
+#scatterplot {
+	position: absolute;
+	right: 5vw;
+	bottom: 25vh;
+}
+
+#hideButton {
+	transform: scale(1.5);
+	border-radius: 25vh;
+	position: absolute;
+	z-index: 1;
+	right: 5vw;
+	bottom: 25vh;
+}
+
 @media (prefers-color-scheme: light) {
 	:root {
 		color: #213547;

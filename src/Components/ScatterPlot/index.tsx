@@ -1,16 +1,17 @@
-import { useRef, useEffect } from "react";
-import * as d3 from "d3";
+import { useRef, useEffect, useState } from "react";
 import { ScatterPlotProps } from "./types";
+import bot from "../../assets/bot.svg";
+import * as d3 from "d3";
 
 export function ScatterPlot(props: ScatterPlotProps) {
 	const { shape, point } = props;
-
 	if (!shape?.coordinates.length) return <></>;
 
 	const { coordinates, convex, maxX, maxY, minX, minY } = shape;
 
 	const svgRef = useRef<SVGSVGElement | null>(null);
-
+	/* Button to hide scatter plot */
+	const [isShow, setShow] = useState(false);
 	// prepare data, add 1 more point so it is connected - perform only when convex
 	useEffect(() => {
 		const data = convex
@@ -84,14 +85,30 @@ export function ScatterPlot(props: ScatterPlotProps) {
 				.attr("r", 4)
 				.attr("fill", "red");
 		}
-	}, [coordinates]);
+	}, [coordinates, isShow]);
+
+	const renderSVG = () =>
+		isShow ? (
+			<svg
+				ref={svgRef}
+				id="scatterplot"
+				className="scatterplot"
+				width={400}
+				height={400}></svg>
+		) : (
+			<></>
+		);
 
 	return (
-		<svg
-			ref={svgRef}
-			id="scatterplot"
-			className="scatterplot"
-			width={400}
-			height={400}></svg>
+		<>
+			<button
+				onClick={() => {
+					setShow((state) => !state);
+				}}
+				id="hideButton">
+				<img src={bot} alt="send" />
+			</button>
+			{renderSVG()}
+		</>
 	);
 }
