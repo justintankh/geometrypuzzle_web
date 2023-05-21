@@ -8,6 +8,7 @@ import {
 	getChatContainer,
 	chatStripe,
 	repeatInstructions,
+	focusTextarea,
 } from "./helpers";
 import { validateInput } from "./utils";
 import { FormProps } from "./types";
@@ -50,6 +51,8 @@ function Form({
 			: await startWorkflow();
 
 		handleWorkflowResponse(workflowResponse);
+		form.reset();
+		focusTextarea();
 	};
 
 	return (
@@ -60,8 +63,7 @@ function Form({
 				onKeyDown={(keyEvent) => {
 					if (keyEvent.key !== "Enter") return;
 					handleSubmit(keyEvent);
-				}}
-				onReset={restartWorkflow}>
+				}}>
 				<textarea
 					id="textarea"
 					name="prompt"
@@ -71,7 +73,7 @@ function Form({
 				<button type="submit">
 					<img src={sendSvg} alt="send" />
 				</button>
-				<button type="reset" id="clearButton">
+				<button onClick={restartWorkflow} type="reset" id="clearButton">
 					<img src={reset_on} alt="send" />
 				</button>
 			</form>

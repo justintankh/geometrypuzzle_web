@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react";
 import { ScatterPlotProps } from "./types";
 import bot from "../../assets/bot.svg";
 import * as d3 from "d3";
+import { buttonBlueBorders } from "./constants";
 
 export function ScatterPlot(props: ScatterPlotProps) {
 	const { shape, point } = props;
@@ -102,10 +103,12 @@ export function ScatterPlot(props: ScatterPlotProps) {
 	return (
 		<>
 			<button
-				onClick={() => {
+				onClick={(e) => {
 					setShow((state) => !state);
+					e.currentTarget.blur();
 				}}
-				id="hideButton">
+				id="hideButton"
+				style={!isShow ? buttonBlueBorders : {}}>
 				<img src={bot} alt="send" />
 			</button>
 			{renderSVG()}
