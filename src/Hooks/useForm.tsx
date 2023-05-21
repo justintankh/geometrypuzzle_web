@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect } from "react";
 import sendSvg from "../assets/send.svg";
 import reset_on from "../assets/reset-on.svg";
 import "../App.css";
