@@ -40,6 +40,7 @@ export function handleWorkflowResponse(workflowResponse: PuzzleResponse) {
 	messageDiv.innerHTML = " ";
 
 	typeText(messageDiv, botMessage as string);
+	focusTextarea();
 }
 
 export function repeatInstructions(prevInstructions: string) {

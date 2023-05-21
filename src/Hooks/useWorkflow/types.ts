@@ -58,5 +58,8 @@ export type PuzzleResponse = {
 		maxY: number;
 		minY: number;
 	};
+	point: Point;
 	display: Display;
 };
+
+export type Shape = PuzzleResponse["shape"];

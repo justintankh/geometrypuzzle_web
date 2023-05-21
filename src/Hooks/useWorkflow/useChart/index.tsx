@@ -1,0 +1,3 @@
+export function useChart() {
+	return;
+}

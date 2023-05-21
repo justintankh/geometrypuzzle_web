@@ -2,25 +2,22 @@ import { FormEvent, useEffect } from "react";
 import sendSvg from "../../assets/send.svg";
 import reset_on from "../../assets/reset-on.svg";
 import "../../App.css";
-import { useWorkflow } from "../../Hooks/useWorkflow";
 import {
 	restoreBotMessage,
 	handleWorkflowResponse,
 	getChatContainer,
-	focusTextarea,
 	chatStripe,
 	repeatInstructions,
 } from "./helpers";
 import { validateInput } from "./utils";
+import { FormProps } from "./types";
 
-export function Form() {
-	const {
-		startWorkflow,
-		restartWorkflow,
-		callContinueWorkflow,
-		workflowData: prevWorkflowData,
-	} = useWorkflow();
-
+function Form({
+	startWorkflow,
+	restartWorkflow,
+	callContinueWorkflow,
+	workflowData: prevWorkflowData,
+}: FormProps) {
 	/* Only call on mount */
 	useEffect(() => {
 		prevWorkflowData && restoreBotMessage(prevWorkflowData);
@@ -53,8 +50,6 @@ export function Form() {
 			: await startWorkflow();
 
 		handleWorkflowResponse(workflowResponse);
-
-		focusTextarea();
 	};
 
 	return (
@@ -83,3 +78,4 @@ export function Form() {
 		</>
 	);
 }
+export default Form;

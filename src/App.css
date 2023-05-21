@@ -44,6 +44,12 @@ body {
 	display: none;
 }
 
+#scatterplot {
+	position: absolute;
+	right: 5vw;
+	bottom: 25vw;
+}
+
 .wrapper {
 	width: 100%;
 	padding: 15px;

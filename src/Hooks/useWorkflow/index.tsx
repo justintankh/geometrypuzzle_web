@@ -11,7 +11,14 @@ import {
 import { getUUID } from "./helpers";
 import { WORKFLOW_URI } from "../../Components/Form/constants";
 
-export function useWorkflow() {
+export interface WorkflowMethods {
+	startWorkflow: () => Promise<PuzzleResponse>;
+	restartWorkflow: () => Promise<PuzzleResponse>;
+	callContinueWorkflow: (promptInput: string) => Promise<PuzzleResponse>;
+	workflowData: PuzzleResponse | undefined;
+}
+
+export function useWorkflow(): WorkflowMethods {
 	const storedUUID = getUUID();
 	const [workflowData, setWorkflowData] = useState<PuzzleResponse>();
 
