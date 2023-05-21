@@ -8,8 +8,8 @@ import {
 	RequestMapping,
 	MessageName,
 	Point,
-} from "./useWorkflowTypes";
-import { getUUID } from "./useWorkflowUtils";
+} from "./types";
+import { getUUID } from "./helpers";
 
 export function useWorkflow() {
 	const storedUUID = getUUID();

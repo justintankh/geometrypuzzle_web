@@ -1,15 +1,17 @@
 import { FormEvent, useEffect } from "react";
-import sendSvg from "../assets/send.svg";
-import reset_on from "../assets/reset-on.svg";
-import "../App.css";
-import { chatStripe, generateUniqueId } from "./useFormUtils";
-import { useWorkflow } from "./useWorkflow";
+import sendSvg from "../../assets/send.svg";
+import reset_on from "../../assets/reset-on.svg";
+import "../../App.css";
+import { useWorkflow } from "../../Hooks/useWorkflow";
 import {
 	restoreBotMessage,
 	handleWorkflowResponse,
 	getChatContainer,
 	focusTextarea,
-} from "./useFormHelper";
+	chatStripe,
+	repeatInstructions,
+} from "./helpers";
+import { validateInput } from "./utils";
 
 export function useFormHook() {
 	const {
@@ -81,18 +83,4 @@ export function useFormHook() {
 	return {
 		FormDisplay: Form,
 	};
-}
-
-function validateInput(regex: string[], value: string) {
-	return regex.some((regExp) => new RegExp(regExp).test(value));
-}
-
-function repeatInstructions(prevInstructions: string) {
-	const chatContainer = getChatContainer();
-
-	// bot's chatstripe
-	const uniqueId = generateUniqueId();
-	chatContainer.innerHTML += chatStripe(true, prevInstructions, uniqueId);
-	// to focus scroll to the bottom
-	chatContainer.scrollTop = chatContainer.scrollHeight;
 }

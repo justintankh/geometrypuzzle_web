@@ -1,5 +1,5 @@
 import "./App.css";
-import { useFormHook } from "./Hooks/useForm";
+import { useFormHook } from "./Components/Form";
 
 function App() {
 	const { FormDisplay } = useFormHook();
