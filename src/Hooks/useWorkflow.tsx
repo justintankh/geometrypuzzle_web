@@ -1,22 +1,16 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import {
-	RestartRequest,
-	ContinueRequest,
-	StartRequest,
-	PuzzleResponse,
-	RequestMapping,
-	MessageName,
-	Point,
+    ContinueRequest,
+    MessageName,
+    Point,
+    PuzzleResponse,
+    RequestMapping,
+    RestartRequest,
+    StartRequest,
+    WorkflowMethods,
 } from "./types";
-import { getUUID } from "./helpers";
-import { WORKFLOW_URI } from "../../Components/Form/constants";
-
-export interface WorkflowMethods {
-	startWorkflow: () => Promise<PuzzleResponse>;
-	restartWorkflow: () => Promise<PuzzleResponse>;
-	callContinueWorkflow: (promptInput: string) => Promise<PuzzleResponse>;
-	workflowData: PuzzleResponse | undefined;
-}
+import {constructPointFromPrompt, getUUID, inferMessageName} from "./helpers";
+import {WORKFLOW_URI} from "../Components/Form/constants";
 
 export function useWorkflow(): WorkflowMethods {
 	const storedUUID = getUUID();
@@ -24,9 +18,12 @@ export function useWorkflow(): WorkflowMethods {
 
 	/* To only call once on mount */
 	useEffect(() => {
-		startWorkflow().then((data) => {
-			setWorkflowData(data);
-		});
+		if (workflowData) return;
+		startWorkflow()
+			.then((data) => {
+				setWorkflowData(data);
+			})
+			.catch(() => console.error("Fetch has failed"));
 	}, []);
 
 	async function callWorkflow({
@@ -77,29 +74,6 @@ export function useWorkflow(): WorkflowMethods {
 			endpoint: RequestMapping.CONTINUE,
 			payload: { processKey: storedUUID, point, message },
 		});
-	}
-
-	function inferMessageName(
-		possibleFlow: MessageName[],
-		allowedFlows: MessageName[] | undefined
-	) {
-		const flow = possibleFlow.filter((message) =>
-			allowedFlows?.includes(message)
-		);
-
-		if (flow.length > 1) {
-			throw new Error(`Multiple possible flow found ${flow}`);
-		}
-		return flow[0];
-	}
-
-	function constructPointFromPrompt(promptData: string) {
-		const [x, y] = promptData.split(" ");
-		const point = {
-			x: parseInt(x),
-			y: parseInt(y),
-		};
-		return point;
 	}
 
 	function callContinueWorkflow(promptInput: string) {

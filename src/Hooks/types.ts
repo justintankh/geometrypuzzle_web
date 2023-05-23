@@ -63,3 +63,10 @@ export type PuzzleResponse = {
 };
 
 export type Shape = PuzzleResponse["shape"];
+
+export interface WorkflowMethods {
+	startWorkflow: () => Promise<PuzzleResponse>;
+	restartWorkflow: () => Promise<PuzzleResponse>;
+	callContinueWorkflow: (promptInput: string) => Promise<PuzzleResponse>;
+	workflowData: PuzzleResponse | undefined;
+}

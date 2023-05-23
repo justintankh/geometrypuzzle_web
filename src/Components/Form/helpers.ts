@@ -1,8 +1,7 @@
 import bot from "../../assets/bot.svg";
 import user from "../../assets/user.svg";
-import { generateUniqueId } from "./utils";
-import { loader, typeText } from "./utils";
-import { PuzzleResponse } from "../../Hooks/useWorkflow/types";
+import {generateUniqueId, loader, typeText} from "./utils";
+import {PuzzleResponse} from "../../Hooks/types";
 
 export const getChatContainer = () =>
 	document.querySelector("#chat_container") as Element;

@@ -1,17 +1,17 @@
-import { FormEvent, useEffect } from "react";
+import {FormEvent, useEffect} from "react";
 import sendSvg from "../../assets/send.svg";
 import reset_on from "../../assets/reset-on.svg";
 import "../../App.css";
 import {
-	restoreBotMessage,
-	handleWorkflowResponse,
-	getChatContainer,
-	chatStripe,
-	repeatInstructions,
-	focusTextarea,
+    chatStripe,
+    focusTextarea,
+    getChatContainer,
+    handleWorkflowResponse,
+    repeatInstructions,
+    restoreBotMessage,
 } from "./helpers";
-import { validateInput } from "./utils";
-import { FormProps } from "./types";
+import {validateInput} from "./utils";
+import {FormProps} from "./types";
 
 function Form({
 	startWorkflow,
@@ -19,7 +19,7 @@ function Form({
 	callContinueWorkflow,
 	workflowData: prevWorkflowData,
 }: FormProps) {
-	/* Only call on mount */
+	/* Only call on mount and on restart workflow */
 	useEffect(() => {
 		prevWorkflowData && restoreBotMessage(prevWorkflowData);
 	}, [!prevWorkflowData]);
@@ -45,7 +45,7 @@ function Form({
 		// Append user's chat-strip , if regex valid
 		getChatContainer().innerHTML += chatStripe(false, promptInput);
 
-		// If there was regex and already checked
+		// If there was regex and checked passed
 		const workflowResponse = allowedRegex
 			? await callContinueWorkflow(promptInput)
 			: await startWorkflow();

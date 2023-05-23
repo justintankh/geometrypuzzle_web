@@ -1,3 +1,3 @@
-import { WorkflowMethods } from "../../Hooks/useWorkflow";
+import {WorkflowMethods} from "../../Hooks/types";
 
 export type FormProps = WorkflowMethods;
